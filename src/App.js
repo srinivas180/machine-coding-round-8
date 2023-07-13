@@ -1,9 +1,17 @@
+import { Route, Routes } from "react-router";
+
+import { Home } from "./pages/Home";
+import { Event } from "./pages/Event";
+
 import "./App.css";
 
 function App() {
     return (
         <div className="App">
-            <h1>Hello World</h1>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/event/:eventId" element={<Event />} />
+            </Routes>
         </div>
     );
 }

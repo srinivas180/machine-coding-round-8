@@ -1,0 +1,45 @@
+.info {
+    width: 85%;
+}
+
+.info__img {
+    width: 100%;
+}
+
+.tags {
+    gap: 12px;
+}
+
+.tag {
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px;
+}
+
+.right-container {
+    width: 33%;
+}
+
+.speakers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.speaker {
+    width: 100%;
+}
+
+.speaker__img {
+    width: 75%;
+    border-radius: 10px;
+}
+
+.speaker__name {
+    margin: 4px 0;
+}
+
+.speaker__designatio {
+    margin: 0;
+}
