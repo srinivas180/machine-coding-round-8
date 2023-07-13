@@ -11,6 +11,11 @@ export function Home() {
 
     let filteredMeetups = data.meetups;
 
+    function formatDate(string) {
+        var options = { year: "numeric", month: "long", day: "numeric" };
+        return new Date(string).toLocaleDateString([], options);
+    }
+
     // filter by event type
     filteredMeetups =
         eventType === "Both"
@@ -66,7 +71,7 @@ export function Home() {
                         {filteredMeetups.map((meetup) => (
                             <div key={meetup.id} className="meetup">
                                 <Link
-                                    className="meetup__link"
+                                    className="meetup__link link link--decor-none"
                                     to={`/event/${meetup.id}`}
                                 >
                                     <img
@@ -75,7 +80,7 @@ export function Home() {
                                         alt={meetup.eventType}
                                     />
                                     <p className="meetup__time">
-                                        {meetup.eventStartTime}
+                                        {formatDate(meetup.eventStartTime)}
                                     </p>
                                     <p className="meetup__title">
                                         {meetup.title}
