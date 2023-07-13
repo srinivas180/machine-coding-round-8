@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams } from "react-router";
 
 import { data } from "../../db/data";
@@ -7,6 +8,11 @@ import "./index.css";
 export function Event() {
     const { eventId } = useParams();
     const event = data.meetups.find((meetup) => meetup.id === eventId);
+    const [rsvp, setRSVP] = useState(false);
+    const [showRSVPForm, setShowRSVPForm] = useState(false);
+    const currentTime = new Date();
+    const eventStartTime = new Date(event.eventStartTime);
+
     return (
         <div className="container flex gap-48">
             <div className="info">
@@ -69,6 +75,62 @@ export function Event() {
                                 </p>
                             </div>
                         ))}
+                    </div>
+                </div>
+                <div className="rsvp">
+                    {rsvp ? (
+                        <button className="button button--primary" disabled>
+                            Already RSVP
+                        </button>
+                    ) : (
+                        <div>
+                            {currentTime < eventStartTime ? (
+                                <button
+                                    className="button button--primary"
+                                    onClick={() => setShowRSVPForm(true)}
+                                >
+                                    RSVP
+                                </button>
+                            ) : (
+                                <>
+                                    <span className="highlight">RSVP: </span>
+                                    <span>
+                                        "Event has started, registration closed"
+                                    </span>
+                                </>
+                            )}
+                        </div>
+                    )}
+                </div>
+                <div
+                    className="modal"
+                    style={{ display: showRSVPForm ? "block" : "none" }}
+                >
+                    <div className="modal__content">
+                        <h3>Complete your RSVP</h3>
+                        <span>Fill in your personal information</span>
+                        <div>
+                            <label htmlFor="name">Name</label>
+                            <input type="text" />
+                        </div>
+                        <div>
+                            <label htmlFor="name">Email</label>
+                            <input type="email" />
+                        </div>
+                        {event.isPaid ? (
+                            <p>You have to make payment at the venue.</p>
+                        ) : (
+                            ""
+                        )}
+                        <button
+                            className="button button--primary"
+                            onClick={() => {
+                                setRSVP(true);
+                                setShowRSVPForm(false);
+                            }}
+                        >
+                            RSVP
+                        </button>
                     </div>
                 </div>
             </div>
