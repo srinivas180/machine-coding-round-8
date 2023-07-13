@@ -85,6 +85,7 @@ export function Home() {
                                     <p className="meetup__title">
                                         {meetup.title}
                                     </p>
+                                    <p>Event Type: {meetup.eventType}</p>
                                 </Link>
                             </div>
                         ))}
